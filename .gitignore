@@ -8,6 +8,7 @@ obj/
 *.exe
 *.dll
 *.pdb
+*.vcxproj
 Thumbs.db
 # Visual Studio Code
 .vscode/
