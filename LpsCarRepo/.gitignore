@@ -1,0 +1,28 @@
+# Ignore Visual Studio workspace and temporary files
+.vs/
+.vs/**.vsidx
+*.suo
+*.user
+*.userosscache
+*.VC.db
+*.VC.VC.opendb
+
+# Build artifacts
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Logs
+*.log
+
+# Misc
+*.vspscc
+*.vssscc

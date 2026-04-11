@@ -19,5 +19,5 @@ Point calculatePosition(Satellite s1, Satellite s2, Satellite s3) {
     double finalX = (C * E - F * B) / determinant;
     double finalY = (A * F - D * C) / determinant;
 
-    return { finalX, finalY };
+    return { std::round(finalX), std::round(finalY) };
 }

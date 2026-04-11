@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7b39ac00-70c8-4289-9214-3e1dcc584a1f}</ProjectGuid>
-    <RootNamespace>LpsCar</RootNamespace>
+    <ProjectGuid>{f56e919d-958c-4757-9327-0fa698f6d411}</ProjectGuid>
+    <RootNamespace>LpsCarRepo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LpsCar.cpp" />
+    <ClCompile Include="LpsCarRepo.cpp" />
+    <ClCompile Include="satellite-logic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Trilateration.h" />

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="LpsCarRepo/LpsCarRepo.vcxproj" Id="f56e919d-958c-4757-9327-0fa698f6d411" />
+</Solution>
