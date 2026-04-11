@@ -1,0 +1,13 @@
+.vs/
+x64/
+*.slnx
+*.suo
+*.user
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+Thumbs.db
+# Visual Studio Code
+.vscode/
