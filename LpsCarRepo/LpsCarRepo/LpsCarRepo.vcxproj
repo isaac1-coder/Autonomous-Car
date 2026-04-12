@@ -129,8 +129,11 @@
   <ItemGroup>
     <ClCompile Include="LpsCarRepo.cpp" />
     <ClCompile Include="satellite-logic.cpp" />
+    <ClCompile Include="SharedState.cpp" />
+    <ClCompile Include="SharedState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MotorControl.h" />
     <ClInclude Include="Trilateration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

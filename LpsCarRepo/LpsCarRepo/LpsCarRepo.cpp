@@ -1,20 +1,31 @@
-#include "Trilateration.h"
-#include <iostream>
+#include <Arduino.h>
+#include "SharedState.h"
+#include "MotorControl.h"
 
-void updateCarMovement() {
-    Satellite s1 = { 6, 0, -1 };
-    Satellite s2 = { 0, 21, -1 };
-    Satellite s3 = { -7, 0, -1 };
-    s1.updateDistance();
-    s2.updateDistance();
-    s3.updateDistance();
-    // This file can use calculatePosition because it includes the .h
-    Point carPos = calculatePosition(s1, s2, s3);
+// Forward declarations from other files
+void pathfind();
+void validateAndCorrectPosition(double ultrasonic_dist);
 
-    std::cout << " car : " << carPos.x << ", " << carPos.y << std::endl;
+void setup() {
+    Serial.begin(115200);
+    setupMotors();
+    Serial.println("System Initialized...");
 }
 
-int main() {
-    updateCarMovement();
-    return 0;
+void loop() {
+    if (!done) {
+        // 1. Check sensors and fuse positioning
+        // (Assuming an ultrasonic sensor on pin 32)
+        double sensor_reading = 1.0; // Mock 6 inches
+        validateAndCorrectPosition(sensor_reading);
+
+        // 2. Decision making
+        pathfind();
+
+        // 3. Small delay to prevent loop thrashing
+        delay(500);
+    }
+    else {
+        moveMotors(0); // Stop
+    }
 }

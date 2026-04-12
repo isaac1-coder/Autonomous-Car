@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Check_Position_WithObsticals/Check_Position_WithObsticals.vcxproj" Id="3163d7e3-c134-4e84-9fa5-28175b5dd9ca" />
+</Solution>

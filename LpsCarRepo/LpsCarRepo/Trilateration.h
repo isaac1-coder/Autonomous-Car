@@ -1,10 +1,8 @@
-#ifndef LPSCAR_TRILATERATION_H
-#define LPSCAR_TRILATERATION_H
+#ifndef TRILATERATION_H
+#define TRILATERATION_H
 
+#include <vector>
 #include <cmath>
-
-// Simulated radio pulse function (forward declaration must appear before use)
-double send_pulse(int sat_num);
 
 struct Point {
     double x;
@@ -16,15 +14,11 @@ public:
     int sat_num;
     double x;
     double y;
-    double r; // The distance value used by the math logic
-
-    // Updates 'r' based on the simulated pulse/signal strength
-    void updateDistance() {
-        this->r = send_pulse(this->sat_num);
-    }
+    double r;
+    void updateDistance();
 };
 
-// The math logic
+double send_pulse(int sat_num);
 Point calculatePosition(Satellite s1, Satellite s2, Satellite s3);
 
 #endif
