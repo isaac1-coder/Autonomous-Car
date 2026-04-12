@@ -136,6 +136,9 @@
     <ClInclude Include="MotorControl.h" />
     <ClInclude Include="Trilateration.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Main.ino" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

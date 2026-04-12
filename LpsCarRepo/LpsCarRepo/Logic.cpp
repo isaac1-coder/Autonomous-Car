@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "SharedState.h"   // To access car_position and obstacles
-#include "MotorControl.h" // To control the physical ESP32 motors
+#include "SharedState.h"
+#include "MotorControl.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ void physical_move(int target_x, int target_y) {
     // Calculate angle: 0 is Up (+Y), 90 is Right (+X), 180 is Down (-Y), -90 is Left (-X)
     float target_angle = atan2(dx, dy) * 180.0 / 3.14159;
 
-    // 1. Turn the car to face the target point (handles 45, 90, 180 turns)
+    // 1. Turn the car to face the target point
     turnToAngle(target_angle);
 
     // 2. Move forward after turning
@@ -62,7 +62,7 @@ int move()
             !is_blocked(car_postion.x + 1, car_postion.y) && sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2)) < sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2)))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x + 1 << "," << car_postion.y << ")" << endl;
-            physical_move(car_postion.x + 1, car_postion.y); // Physical Motor Call
+            physical_move(car_postion.x + 1, car_postion.y);
             distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2));
             car_postion.x += 1;
             can_move_away = true;
@@ -72,7 +72,7 @@ int move()
             !is_blocked(car_postion.x + 1, car_postion.y + 1))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x + 1 << "," << car_postion.y + 1 << ")" << endl;
-            physical_move(car_postion.x + 1, car_postion.y + 1); // Physical Motor Call
+            physical_move(car_postion.x + 1, car_postion.y + 1);
             distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
             car_postion.x += 1;
             car_postion.y += 1;
@@ -84,7 +84,7 @@ int move()
             !is_blocked(car_postion.x, car_postion.y + 1) && sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2)) < sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2)))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x << "," << car_postion.y + 1 << ")" << endl;
-            physical_move(car_postion.x, car_postion.y + 1); // Physical Motor Call
+            physical_move(car_postion.x, car_postion.y + 1);
             distance_to_end = sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
             car_postion.y += 1;
             can_move_away = true;
@@ -94,7 +94,7 @@ int move()
             !is_blocked(car_postion.x - 1, car_postion.y + 1))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x - 1 << "," << car_postion.y + 1 << ")" << endl;
-            physical_move(car_postion.x - 1, car_postion.y + 1); // Physical Motor Call
+            physical_move(car_postion.x - 1, car_postion.y + 1);
             distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
             car_postion.x -= 1;
             car_postion.y += 1;
@@ -105,7 +105,7 @@ int move()
             !is_blocked(car_postion.x - 1, car_postion.y) && sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2)) < sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2)))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x - 1 << "," << car_postion.y << ")" << endl;
-            physical_move(car_postion.x - 1, car_postion.y); // Physical Motor Call
+            physical_move(car_postion.x - 1, car_postion.y);
             distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2));
             car_postion.x -= 1;
             can_move_away = true;
@@ -115,7 +115,7 @@ int move()
             !is_blocked(car_postion.x - 1, car_postion.y - 1))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x - 1 << "," << car_postion.y - 1 << ")" << endl;
-            physical_move(car_postion.x - 1, car_postion.y - 1); // Physical Motor Call
+            physical_move(car_postion.x - 1, car_postion.y - 1);
             distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
             car_postion.x -= 1;
             car_postion.y -= 1;
@@ -126,7 +126,7 @@ int move()
             !is_blocked(car_postion.x, car_postion.y - 1) && sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2)) < sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2)))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x << "," << car_postion.y - 1 << ")" << endl;
-            physical_move(car_postion.x, car_postion.y - 1); // Physical Motor Call
+            physical_move(car_postion.x, car_postion.y - 1);
             distance_to_end = sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
             car_postion.y -= 1;
             can_move_away = true;
@@ -136,7 +136,7 @@ int move()
             !is_blocked(car_postion.x + 1, car_postion.y - 1))
         {
             cout << "car moved from(" << car_postion.x << "," << car_postion.y << ") to(" << car_postion.x + 1 << "," << car_postion.y - 1 << ")" << endl;
-            physical_move(car_postion.x + 1, car_postion.y - 1); // Physical Motor Call
+            physical_move(car_postion.x + 1, car_postion.y - 1);
             distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
             car_postion.x += 1;
             car_postion.y -= 1;
@@ -151,7 +151,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x + 1 << "," << car_postion.y << ")" << endl;
-                physical_move(car_postion.x + 1, car_postion.y); // Physical Motor Call
+                physical_move(car_postion.x + 1, car_postion.y);
                 distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2));
                 car_postion.x += 1;
                 can_move_away = true;
@@ -161,7 +161,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x << "," << car_postion.y + 1 << ")" << endl;
-                physical_move(car_postion.x, car_postion.y + 1); // Physical Motor Call
+                physical_move(car_postion.x, car_postion.y + 1);
                 distance_to_end = sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
                 car_postion.y += 1;
                 can_move_away = true;
@@ -172,7 +172,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x - 1 << "," << car_postion.y << ")" << endl;
-                physical_move(car_postion.x - 1, car_postion.y); // Physical Motor Call
+                physical_move(car_postion.x - 1, car_postion.y);
                 distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - endpoint.y, 2));
                 car_postion.x -= 1;
                 can_move_away = true;
@@ -182,7 +182,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x << "," << car_postion.y - 1 << ")" << endl;
-                physical_move(car_postion.x, car_postion.y - 1); // Physical Motor Call
+                physical_move(car_postion.x, car_postion.y - 1);
                 distance_to_end = sqrt(pow(car_postion.x - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
                 car_postion.y -= 1;
                 can_move_away = true;
@@ -193,7 +193,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x + 1 << "," << car_postion.y + 1 << ")" << endl;
-                physical_move(car_postion.x + 1, car_postion.y + 1); // Physical Motor Call
+                physical_move(car_postion.x + 1, car_postion.y + 1);
                 distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
                 car_postion.x += 1;
                 car_postion.y += 1;
@@ -204,7 +204,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x - 1 << "," << car_postion.y + 1 << ")" << endl;
-                physical_move(car_postion.x - 1, car_postion.y + 1); // Physical Motor Call
+                physical_move(car_postion.x - 1, car_postion.y + 1);
                 distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y + 1 - endpoint.y, 2));
                 car_postion.x -= 1;
                 car_postion.y += 1;
@@ -216,7 +216,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x - 1 << "," << car_postion.y - 1 << ")" << endl;
-                physical_move(car_postion.x - 1, car_postion.y - 1); // Physical Motor Call
+                physical_move(car_postion.x - 1, car_postion.y - 1);
                 distance_to_end = sqrt(pow(car_postion.x - 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
                 car_postion.x -= 1;
                 car_postion.y -= 1;
@@ -227,7 +227,7 @@ int move()
                 blocked.push_back({ car_postion.x, car_postion.y });
                 cout << "car moved from(" << car_postion.x << "," << car_postion.y
                     << ") to(" << car_postion.x + 1 << "," << car_postion.y - 1 << ")" << endl;
-                physical_move(car_postion.x + 1, car_postion.y - 1); // Physical Motor Call
+                physical_move(car_postion.x + 1, car_postion.y - 1);
                 distance_to_end = sqrt(pow(car_postion.x + 1 - endpoint.x, 2) + pow(car_postion.y - 1 - endpoint.y, 2));
                 car_postion.x += 1;
                 car_postion.y -= 1;

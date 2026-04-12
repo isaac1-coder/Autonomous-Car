@@ -2,10 +2,8 @@
 #include <Arduino.h>
 
 double send_pulse(int sat_num) {
-    // Simulated pulse with slight random noise for ESP32
-    double base = 2.0 + (sat_num * 1.5);
-    double noise = (random(-50, 50) / 100.0);
-    return base + noise;
+    // Simulated radio signal for ESP32
+    return 2.0 + (sat_num * 1.2) + (random(-10, 10) / 100.0);
 }
 
 Point calculatePosition(Satellite s1, Satellite s2, Satellite s3) {

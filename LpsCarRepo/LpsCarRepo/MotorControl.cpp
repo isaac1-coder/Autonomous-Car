@@ -16,33 +16,41 @@ void setupMotors() {
 void turnToAngle(float targetAngle) {
     float angleDiff = targetAngle - current_heading;
 
-    // Normalize angle
+    // Normalize to -180 to 180
     while (angleDiff > 180) angleDiff -= 360;
     while (angleDiff < -180) angleDiff += 360;
 
-    if (abs(angleDiff) < 5) return; // Close enough
+    if (abs(angleDiff) < 5) return;
 
-    // If angle is positive, turn Right. If negative, turn Left.
+    // Turn right or left depending on shortest path
     if (angleDiff > 0) {
-        // Physical Turn Right Logic
+        // Turn Right
         analogWrite(L_FOR, 200); digitalWrite(L_BACK, LOW);
         digitalWrite(R_FOR, LOW); analogWrite(R_BACK, 200);
     }
     else {
-        // Physical Turn Left Logic
+        // Turn Left
         digitalWrite(L_FOR, LOW); analogWrite(L_BACK, 200);
         analogWrite(R_FOR, 200); digitalWrite(R_BACK, LOW);
     }
 
-    delay(abs(angleDiff) * 10); // Simulated time to reach angle
-    digitalWrite(L_FOR, LOW); digitalWrite(R_FOR, LOW);
+    // Time based on how many degrees we need to turn
+    delay(abs(angleDiff) * 10);
+
+    // Stop
+    digitalWrite(L_FOR, LOW); digitalWrite(L_BACK, LOW);
+    digitalWrite(R_FOR, LOW); digitalWrite(R_BACK, LOW);
+
     current_heading = targetAngle;
 }
 
 void moveForwardOneUnit() {
-    analogWrite(L_FOR, 210);
-    analogWrite(R_FOR, 210);
-    delay(1000); // Time to move one grid unit (6 inches)
-    digitalWrite(L_FOR, LOW);
-    digitalWrite(R_FOR, LOW);
+    // Move Forward
+    analogWrite(L_FOR, 210); digitalWrite(L_BACK, LOW);
+    analogWrite(R_FOR, 210); digitalWrite(R_BACK, LOW);
+
+    delay(1000); // Time to move 6 inches
+
+    // Stop
+    digitalWrite(L_FOR, LOW); digitalWrite(R_FOR, LOW);
 }
